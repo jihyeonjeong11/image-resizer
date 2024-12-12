@@ -19,12 +19,3 @@ const NavLinks = () => {
 };
 
 export default NavLinks;
-{
-  /* <nav className="px-navHorizontalPadding py-navVerticalPadding">
-<Link href="hello">Home</Link>
-
-<Link className={`link `} href="/about">
-  About
-</Link>
-</nav> */
-}
