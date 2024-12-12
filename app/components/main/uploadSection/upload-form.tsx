@@ -1,15 +1,28 @@
 "use client";
-import React, { useRef } from "react";
+
+import React, { useRef, useState } from "react";
 import FileSVG from "@/public/file.svg";
 import uploadAction from "./fileUploader";
-
-// https://siamahnaf.medium.com/next-js-server-action-a-guide-to-uploading-files-to-aws-s3-00b61358536c
+import Image from "next/image";
 
 const UploadForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const [fileURI, setFileURI] = useState<string | null>(null);
 
-  const handleFileChange = () => {
-    formRef.current?.requestSubmit(); // Programmatically submit the form
+  const handleFileChange = async () => {
+    if (formRef.current) {
+      const formData = new FormData(formRef.current);
+      const response = await uploadAction(formData);
+
+      console.log(response);
+
+      if (response.error) {
+        console.error(response.error);
+        return;
+      }
+
+      setFileURI(response.fileURI);
+    }
   };
 
   return (
@@ -20,7 +33,7 @@ const UploadForm = () => {
           <form
             ref={formRef}
             className="flex flex-col justify-center items-center mt-6"
-            action={uploadAction}
+            encType="multipart/form-data"
           >
             <input
               id="file-upload"
@@ -36,6 +49,12 @@ const UploadForm = () => {
               Choose File
             </label>
           </form>
+          {fileURI && (
+            <div className="mt-4">
+              <p>File uploaded successfully:</p>
+              <Image src={`${fileURI}`} width={300} height={300} />
+            </div>
+          )}
         </div>
       </div>
     </div>
