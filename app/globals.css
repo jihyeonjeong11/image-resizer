@@ -1,21 +1,27 @@
-@tailwind base;
+@tailwind base; /* CSS reset placed here.*/
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  .max-w-1440 {
+    max-width: 1440px;
+    margin: 0 auto;
   }
-}
+  :root {
+    --color-primary: 110 153 244;
+    --color-text: 33 33 33;
+    --color-success: 0 200 81;
+    --color-info: 51 181 229;
+    --color-warn: 255 187 51;
+    --color-error: 254 78 78;
+  }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  :root [class~="dark"] {
+    --color-primary: 247 147 34;
+    --color-text: 33 33 33;
+    --color-success: 0 200 81;
+    --color-info: 51 181 229;
+    --color-warn: 255 187 51;
+    --color-error: 254 78 78;
+  }
 }
