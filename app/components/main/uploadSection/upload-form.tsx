@@ -1,38 +1,43 @@
-import React from "react";
-import { promises as fs } from "fs";
+"use client";
+import React, { useRef } from "react";
+import FileSVG from "@/public/file.svg";
+import uploadAction from "./fileUploader";
+
+// https://siamahnaf.medium.com/next-js-server-action-a-guide-to-uploading-files-to-aws-s3-00b61358536c
 
 const UploadForm = () => {
-  async function action(formData: FormData) {
-    "use server";
-    console.log("eiei");
-    try {
-      console.log("eror");
-      const file = formData.get("file") as File;
-      if (!file || file.size === 0) {
-        console.log("return?");
-        return { error: "No file uploaded" };
-      }
+  const formRef = useRef<HTMLFormElement>(null);
 
-      console.log("111");
+  const handleFileChange = () => {
+    formRef.current?.requestSubmit(); // Programmatically submit the form
+  };
 
-      const data = await file.arrayBuffer();
-
-      await fs.mkdir(`${process.cwd()}/tmp`, { recursive: true });
-      await fs.writeFile(
-        `${process.cwd()}/tmp/${file.name}`,
-        Buffer.from(data)
-      );
-      console.log("File saved successfully!");
-    } catch (error) {
-      console.error("Error saving file:", error);
-    }
-  }
   return (
-    <div className="bg-primary p-3">
-      <form action={action}>
-        <input name="file" type="file"></input>
-        <button>upload</button>
-      </form>
+    <div className="p-3 bg-slate-200">
+      <div className="bg-primary px-3 py-10 border-4 border-dashed">
+        <div className="flex flex-col justify-center items-center">
+          <FileSVG width={55} height={55} viewBox="0 0 56 56" fill="white" />
+          <form
+            ref={formRef}
+            className="flex flex-col justify-center items-center mt-6"
+            action={uploadAction}
+          >
+            <input
+              id="file-upload"
+              name="file"
+              type="file"
+              hidden
+              onChange={handleFileChange}
+            />
+            <label
+              className="bg-white p-4 cursor-pointer rounded-md"
+              htmlFor="file-upload"
+            >
+              Choose File
+            </label>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

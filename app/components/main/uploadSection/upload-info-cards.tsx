@@ -19,7 +19,7 @@ const UploadInfoCards = () => {
   return (
     <div className="grid grid-cols-3 gap-16 pt-16">
       {CARD_ARRAY.map(({ title, content }) => (
-        <div>
+        <div key={title}>
           <h3>{title}</h3>
           <span>{content}</span>
         </div>
