@@ -50,3 +50,39 @@ https://dev.to/rajeshkumaryadavdotcom/understanding-error-boundaries-in-nextjs-a
 다커
 
 아래 두개는 좀 있어도..
+
+next 폴더 스트럭쳐 확인하기
+
+12/16
+
+서버 액션
+
+https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations
+https://react.dev/reference/rsc/server-functions
+
+서버 컴포넌트 - Server Components are a new type of Component that renders ahead of time, before bundling, in an environment separate from your client app or SSR server.
+서버 펑션 - Server Functions are for use in React Server Components.
+클라이언트 레이어에서 요청하는 서버의 작업
+서버 액션 - Until September 2024, we referred to all Server Functions as “Server Actions”.
+서버 펑션의 하나로, form에서 요청하는 action의 형태로 작동함.
+서버 뮤테이션 - 서버 액션의 하나. 데이터 뮤테이션에 사용.
+
+웹소켓
+
+https://dev.to/digitalpollution/building-real-time-applications-with-nextjs-134-server-actions-cd4
+https://socket.io/how-to/use-with-nextjs
+
+업로드 프로그레스 추가 중..
+
+1. 웹소켓 프로토콜 추가
+2. 업로드 시 소켓 연결
+3. 서버에서 프로그래스 내려줌
+4. 완료
+
+12/17 vercel 에서 안되므로 axios에서 구현함.
+
+1. axios 추가 upload 숫자로 구현 // 구현
+2. nextjs 폴더 스트럭쳐로 리팩토링
+3. 바 디자인 만들기
+
+에러 모달 만들기
